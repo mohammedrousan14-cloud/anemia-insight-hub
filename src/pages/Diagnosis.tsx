@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
@@ -8,9 +8,12 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
+import { Eye, Upload, X } from "lucide-react";
 
 const Diagnosis = () => {
   const navigate = useNavigate();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [eyeImage, setEyeImage] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: "",
     age: "",
@@ -38,6 +41,28 @@ const Diagnosis = () => {
 
   const handleChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (!file.type.startsWith("image/")) {
+        toast.error("Please upload an image file");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setEyeImage(event.target?.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeImage = () => {
+    setEyeImage(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   return (
@@ -94,6 +119,51 @@ const Diagnosis = () => {
                       </SelectContent>
                     </Select>
                   </div>
+                </div>
+
+                {/* Eye Image Upload Section */}
+                <div className="space-y-2">
+                  <Label className="flex items-center gap-2">
+                    <Eye className="w-4 h-4 text-primary" />
+                    Eye Image (Optional)
+                  </Label>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Upload a clear photo of the inner eyelid for conjunctival pallor assessment
+                  </p>
+                  
+                  {!eyeImage ? (
+                    <div
+                      onClick={() => fileInputRef.current?.click()}
+                      className="border-2 border-dashed border-border rounded-lg p-8 text-center cursor-pointer hover:border-primary/50 hover:bg-secondary/50 transition-all"
+                    >
+                      <Upload className="w-10 h-10 mx-auto mb-3 text-muted-foreground" />
+                      <p className="text-muted-foreground">Click to upload eye image</p>
+                      <p className="text-xs text-muted-foreground mt-1">PNG, JPG up to 10MB</p>
+                    </div>
+                  ) : (
+                    <div className="relative rounded-lg overflow-hidden border border-border">
+                      <img
+                        src={eyeImage}
+                        alt="Eye scan"
+                        className="w-full h-48 object-cover"
+                      />
+                      <button
+                        type="button"
+                        onClick={removeImage}
+                        className="absolute top-2 right-2 bg-destructive text-destructive-foreground p-1.5 rounded-full hover:bg-destructive/80 transition-colors"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
+                  )}
+                  
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="hidden"
+                  />
                 </div>
 
                 <div className="space-y-2">
