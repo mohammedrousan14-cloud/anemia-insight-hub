@@ -3,7 +3,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Activity, FileText, Stethoscope, AlertCircle } from "lucide-react";
+import { Activity, FileText, Stethoscope, AlertCircle, Target, Users, Microscope, HeartPulse } from "lucide-react";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -95,6 +95,74 @@ const Index = () => {
                 </CardDescription>
               </CardHeader>
             </Card>
+          </div>
+        </section>
+
+        {/* Website Objectives Section */}
+        <section className="container mx-auto px-4 py-16 border-t border-border">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4 border border-primary/20">
+                <Target className="w-4 h-4" />
+                <span className="text-sm font-medium">أهداف الموقع</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Website Objectives
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                نسعى لتحقيق الأهداف التالية من خلال هذا النظام التشخيصي
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <Card className="bg-card border-border hover:border-primary/50 transition-colors">
+                <CardHeader>
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
+                    <Microscope className="w-6 h-6 text-primary" />
+                  </div>
+                  <CardTitle className="text-lg">التشخيص المبكر لفقر الدم</CardTitle>
+                  <CardDescription>
+                    تمكين المستخدمين من اكتشاف فقر الدم في مراحله المبكرة من خلال تحليل معايير الدم الأساسية، مما يساعد في العلاج السريع والفعال
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+
+              <Card className="bg-card border-border hover:border-primary/50 transition-colors">
+                <CardHeader>
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
+                    <Users className="w-6 h-6 text-primary" />
+                  </div>
+                  <CardTitle className="text-lg">زيادة الوعي الصحي</CardTitle>
+                  <CardDescription>
+                    نشر المعلومات الطبية الصحيحة حول أنواع فقر الدم وأعراضه وطرق الوقاية والعلاج بطريقة مبسطة ومفهومة للجميع
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+
+              <Card className="bg-card border-border hover:border-primary/50 transition-colors">
+                <CardHeader>
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
+                    <HeartPulse className="w-6 h-6 text-primary" />
+                  </div>
+                  <CardTitle className="text-lg">تسهيل الرعاية الصحية</CardTitle>
+                  <CardDescription>
+                    توفير أداة سهلة الاستخدام تساعد المرضى على فهم نتائج تحاليلهم وتوجيههم للخطوات التالية المناسبة
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+
+              <Card className="bg-card border-border hover:border-primary/50 transition-colors">
+                <CardHeader>
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
+                    <Activity className="w-6 h-6 text-primary" />
+                  </div>
+                  <CardTitle className="text-lg">دعم القرار الطبي</CardTitle>
+                  <CardDescription>
+                    مساعدة الأطباء والمتخصصين في الحصول على تحليل أولي سريع لحالات فقر الدم بناءً على المعايير الطبية المعتمدة
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </div>
           </div>
         </section>
 
