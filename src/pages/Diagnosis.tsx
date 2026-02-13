@@ -18,16 +18,12 @@ const Diagnosis = () => {
     name: "",
     age: "",
     gender: "",
-    hemoglobin: "",
-    mcv: "",
-    mch: "",
-    mchc: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.name || !formData.age || !formData.gender || !formData.hemoglobin) {
+    if (!formData.name || !formData.age || !formData.gender) {
       toast.error("Please fill in all required fields");
       return;
     }
@@ -166,57 +162,6 @@ const Diagnosis = () => {
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="hemoglobin">Hemoglobin (g/dL) *</Label>
-                  <Input
-                    id="hemoglobin"
-                    type="number"
-                    step="0.1"
-                    value={formData.hemoglobin}
-                    onChange={(e) => handleChange("hemoglobin", e.target.value)}
-                    placeholder="Normal: 12-16 (Female), 14-18 (Male)"
-                    className="bg-secondary border-border"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="mcv">MCV - Mean Corpuscular Volume (fL)</Label>
-                  <Input
-                    id="mcv"
-                    type="number"
-                    step="0.1"
-                    value={formData.mcv}
-                    onChange={(e) => handleChange("mcv", e.target.value)}
-                    placeholder="Normal: 80-100 fL"
-                    className="bg-secondary border-border"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="mch">MCH - Mean Corpuscular Hemoglobin (pg)</Label>
-                  <Input
-                    id="mch"
-                    type="number"
-                    step="0.1"
-                    value={formData.mch}
-                    onChange={(e) => handleChange("mch", e.target.value)}
-                    placeholder="Normal: 27-31 pg"
-                    className="bg-secondary border-border"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="mchc">MCHC - Mean Corpuscular Hemoglobin Concentration (g/dL)</Label>
-                  <Input
-                    id="mchc"
-                    type="number"
-                    step="0.1"
-                    value={formData.mchc}
-                    onChange={(e) => handleChange("mchc", e.target.value)}
-                    placeholder="Normal: 32-36 g/dL"
-                    className="bg-secondary border-border"
-                  />
-                </div>
 
                 <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
                   Analyze Results
